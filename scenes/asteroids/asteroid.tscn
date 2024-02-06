@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn0rulp7u0y3s"]
+
+[ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_u7s58"]
+
+[node name="Asteroid" type="Area2D"]
+script = ExtResource("1_u7s58")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

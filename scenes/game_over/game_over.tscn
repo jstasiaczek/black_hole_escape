@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu5eciyde1dyl"]
+
+[ext_resource type="Script" path="res://scenes/game_over/game_over.gd" id="1_eiwn2"]
+[ext_resource type="Texture2D" uid="uid://dmhrquo5kcdkv" path="res://assets/bg/bg_02_h.png" id="2_00nro"]
+[ext_resource type="FontFile" uid="uid://docw8tbmk45rm" path="res://assets/fonts/kenvector_future_thin.ttf" id="3_i38jd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2w7xk"]
+font = ExtResource("3_i38jd")
+font_size = 82
+
+[sub_resource type="LabelSettings" id="LabelSettings_6jis2"]
+font = ExtResource("3_i38jd")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_7v372"]
+font = ExtResource("3_i38jd")
+font_size = 36
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eiwn2")
+
+[node name="Bg02H" type="Sprite2D" parent="."]
+self_modulate = Color(0.223529, 0.223529, 0.223529, 1)
+position = Vector2(552, 331)
+texture = ExtResource("2_00nro")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_2w7xk")
+
+[node name="Label2" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Press SPACE
+to 
+try again"
+label_settings = SubResource("LabelSettings_6jis2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="points" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0 points"
+label_settings = SubResource("LabelSettings_7v372")
+
+[node name="high_points" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "High Score
+0 points"
+label_settings = SubResource("LabelSettings_7v372")
+horizontal_alignment = 2

@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://bv76iv8x48mqr"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_28u1f"]
+[ext_resource type="Texture2D" uid="uid://dmhrquo5kcdkv" path="res://assets/bg/bg_02_h.png" id="1_acotj"]
+[ext_resource type="FontFile" uid="uid://docw8tbmk45rm" path="res://assets/fonts/kenvector_future_thin.ttf" id="2_k8m50"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mqrn5"]
+font = ExtResource("2_k8m50")
+font_size = 72
+
+[sub_resource type="LabelSettings" id="LabelSettings_s872c"]
+font = ExtResource("2_k8m50")
+font_size = 45
+
+[sub_resource type="Animation" id="Animation_735rr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_r0uwk"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u66qc"]
+_data = {
+"RESET": SubResource("Animation_735rr"),
+"new_animation": SubResource("Animation_r0uwk")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28u1f")
+
+[node name="Bg02H" type="Sprite2D" parent="."]
+self_modulate = Color(0.231373, 0.231373, 0.231373, 1)
+position = Vector2(579, 330)
+texture = ExtResource("1_acotj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Black Hole Escape"
+label_settings = SubResource("LabelSettings_mqrn5")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "
+
+
+
+
+[font=res://assets/fonts/kenvector_future_thin.ttf][font_size=36]Controls:[/font_size]
+[font_size=24]W,A,S,D - ship controls[/font_size]
+
+[font_size=36]Objects:[/font_size]
+
+[img]res://assets/meteors/asteroid_1.png[/img] [font_size=24]Asteroid - avoid at any cost[/font_size]
+
+[img]res://assets/beacon/spaceStation_019.png[/img] [font_size=24]Beacon - fly through it to score a point[/font_size] 
+
+[img height=80]res://assets/danger/danger_zone.png[/img] [font_size=24] Keep you ship away from edges[/font_size] 
+[/font]"
+
+[node name="Label2" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Press SPACE
+to 
+start game"
+label_settings = SubResource("LabelSettings_s872c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u66qc")
+}
+autoplay = "new_animation"

@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://10kltvnqoq2h"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_56vci"]
+[ext_resource type="PackedScene" uid="uid://c8y7hnsdk3jh7" path="res://scenes/background/background.tscn" id="2_62jyf"]
+[ext_resource type="PackedScene" uid="uid://ee2pm4fw2xjc" path="res://scenes/ship/ship.tscn" id="2_fgaqq"]
+[ext_resource type="PackedScene" uid="uid://d4ag1lmefwxg1" path="res://scenes/barrier/barrier.tscn" id="4_dbfj6"]
+[ext_resource type="PackedScene" uid="uid://b7g7uc0lioeqa" path="res://scenes/danger_zone/danger_zone.tscn" id="4_vyy1c"]
+[ext_resource type="PackedScene" uid="uid://bdqt0jtv8gjil" path="res://scenes/hud/hud.tscn" id="6_vypjj"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_56vci")
+
+[node name="Background" parent="." instance=ExtResource("2_62jyf")]
+offset = Vector2(-100, 0)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, -100, 0)
+
+[node name="Ship" parent="." instance=ExtResource("2_fgaqq")]
+position = Vector2(595, 415)
+
+[node name="asteroid_container" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="spawnMin" type="Marker2D" parent="."]
+position = Vector2(-32, -173)
+
+[node name="spawnMax" type="Marker2D" parent="."]
+position = Vector2(1188, -170)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Barrier" parent="Walls" groups=["asteroid_destroy"] instance=ExtResource("4_dbfj6")]
+position = Vector2(0, 861)
+
+[node name="Celing" parent="Walls" instance=ExtResource("4_dbfj6")]
+position = Vector2(6, -19)
+
+[node name="Floor" parent="Walls" instance=ExtResource("4_dbfj6")]
+position = Vector2(6, 689)
+
+[node name="Wall" parent="Walls" instance=ExtResource("4_dbfj6")]
+position = Vector2(-41, 335)
+scale = Vector2(0.02, 34)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("4_dbfj6")]
+position = Vector2(1177, 334)
+scale = Vector2(0.02, 34)
+
+[node name="dangerZone" parent="Walls" instance=ExtResource("4_vyy1c")]
+
+[node name="dangerZone2" parent="Walls" instance=ExtResource("4_vyy1c")]
+position = Vector2(1152, 648)
+rotation = -3.14159
+
+[node name="dangerZoneWall" parent="Walls" instance=ExtResource("4_vyy1c")]
+position = Vector2(-1.81899e-12, 647)
+rotation = -1.5708
+scale = Vector2(0.561, 1)
+
+[node name="dangerZoneWall2" parent="Walls" instance=ExtResource("4_vyy1c")]
+position = Vector2(1152, 0)
+rotation = 1.5708
+scale = Vector2(0.561, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("6_vypjj")]
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="gameOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="gameOverTimer" to="." method="_on_game_over_timer_timeout"]
