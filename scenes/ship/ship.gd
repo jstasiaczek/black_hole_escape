@@ -43,8 +43,9 @@ func _physics_process(delta):
 
 func play_music_for_action(action: String):
 	if Input.is_action_just_pressed(action):
+		if button_pressed_count == 0:
+			thruster_audio.volume_db = -10
 		button_pressed_count += 1
-		thruster_audio.volume_db = -10
 	if Input.is_action_just_released(action):
 		button_pressed_count -= 1
 		if button_pressed_count == 0:

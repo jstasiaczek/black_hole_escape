@@ -6,19 +6,21 @@ extends Area2D
 @export var width = 0
 var image: Texture2D
 var rotation_speed: float = 0
+var asteroid_info
 #@onready var collision_shape_2d = $CollisionShape2D
 
 func _init():
-	image = load("res://assets/meteors/asteroid_"+str(randi_range(1, 8))+".png")
-	width = image.get_width()
-	height = image.get_height()
+	asteroid_info = AsteroidCache.get_random_asteroid()
+	image = asteroid_info.image
+	width = asteroid_info.width
+	height = asteroid_info.height
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	sprite_2d.texture = image
 	init_rotation()
-	
-	createCollisionShape(image)
+	create_collision_shape()
+
 	SignalManager.on_ship_destroyed.connect(on_ship_destroyed)
 	
 func init_rotation():
@@ -30,14 +32,11 @@ func init_rotation():
 func on_ship_destroyed():
 	set_process(false)
 
-func createCollisionShape(image: Texture):
-	var map = BitMap.new()
-	map.create_from_image_alpha(image.get_image())
-	var polygons = map.opaque_to_polygons(Rect2(Vector2(), map.get_size()))
-	for poly in polygons:
+func create_collision_shape():
+	for poly in asteroid_info.polygons:
 		var collision_polygon = CollisionPolygon2D.new()
 		collision_polygon.polygon = poly
-		collision_polygon.position -= map.get_size() / 2.0
+		collision_polygon.position -= Vector2(width / 2.0, height/ 2.0)
 		add_child(collision_polygon)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
