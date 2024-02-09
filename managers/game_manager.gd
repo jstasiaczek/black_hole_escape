@@ -6,8 +6,12 @@ const SHIP_BASE_MAIN_SPEED: float = 180
 const SHIP_BASE_SECONDARY_SPEED: float = 80
 const ASTEROID_COUNT_MIN: int = 4
 const ASTEROID_COUNT_MAX: int = 7
+const ASTEROID_TYPE_COUNT: int = 8
 const BEACON_SCORE_VALUE: int = 1
+const BEACON_WIDTH = 114
 const GRAVITY: float = 80
+
+const SPAWNER_TYPE: int = 1
 
 var mainScene = preload("res://scenes/main/main.tscn")
 var gameScene = preload("res://scenes/game/game.tscn")

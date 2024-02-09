@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ee2pm4fw2xjc"]
+[gd_scene load_steps=24 format=3 uid="uid://ee2pm4fw2xjc"]
 
 [ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_u2t6m"]
 [ext_resource type="Texture2D" uid="uid://dycf6wwpjd5kx" path="res://assets/ships/playerShip1_orange.png" id="2_38lnr"]
@@ -117,6 +117,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_hpyqp"]
+offsets = PackedFloat32Array(0, 0.707792)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_drav0"]
+gradient = SubResource("Gradient_hpyqp")
+fill = 1
+fill_from = Vector2(0.5, 0.486239)
+
 [node name="Ship" type="CharacterBody2D" groups=["ship"]]
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_u2t6m")
@@ -126,6 +135,19 @@ texture = ExtResource("2_38lnr")
 
 [node name="thrusterForward" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 48.3333)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_l4n8m")
+autoplay = "default"
+frame_progress = 0.781914
+
+[node name="engine1" type="AnimatedSprite2D" parent="."]
+position = Vector2(25, 37)
+sprite_frames = SubResource("SpriteFrames_l4n8m")
+autoplay = "default"
+frame_progress = 0.781914
+
+[node name="engine2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-25, 37)
 sprite_frames = SubResource("SpriteFrames_l4n8m")
 autoplay = "default"
 frame_progress = 0.781914
@@ -155,6 +177,7 @@ autoplay = "default"
 frame_progress = 0.0197355
 
 [node name="destroy" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_gvuuv")
 frame = 1
@@ -162,6 +185,7 @@ frame_progress = 0.382178
 speed_scale = 1.4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(7.5, -33.1, 7.5, -28.9, 11.2, -10.5, 12.1, -10.5, 33.1, 2.5, 35.2, 2.5, 44.5, 1.2, 44.5, 4.1, 47, 15.5, 44.2, 15.5, 37.2, 21.5, 32.9, 21.5, 12.5, 26.1, 5.5, 35.5, -5.6, 35.5, -11.6, 26.5, -13.7, 26.5, -43.5, 19.1, -43.5, 17.3, -46.5, 14.3, -46.5, 4.7, -43.3, 1.5, -39.4, 1.5, -34.3, 2.2, -10.5, -10.8, -10.5, -12.7, -5.5, -32.5, -5.5, -36)
 
 [node name="ThrusterAudio" type="AudioStreamPlayer" parent="."]
@@ -171,3 +195,8 @@ autoplay = true
 
 [node name="BoomPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_gfd7o")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+energy = 0.5
+texture = SubResource("GradientTexture2D_drav0")

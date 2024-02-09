@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://10kltvnqoq2h"]
+[gd_scene load_steps=9 format=3 uid="uid://10kltvnqoq2h"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_56vci"]
 [ext_resource type="PackedScene" uid="uid://c8y7hnsdk3jh7" path="res://scenes/background/background.tscn" id="2_62jyf"]
@@ -6,6 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://d4ag1lmefwxg1" path="res://scenes/barrier/barrier.tscn" id="4_dbfj6"]
 [ext_resource type="PackedScene" uid="uid://b7g7uc0lioeqa" path="res://scenes/danger_zone/danger_zone.tscn" id="4_vyy1c"]
 [ext_resource type="PackedScene" uid="uid://bdqt0jtv8gjil" path="res://scenes/hud/hud.tscn" id="6_vypjj"]
+
+[sub_resource type="Gradient" id="Gradient_q1qvg"]
+offsets = PackedFloat32Array(0, 0.714286, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.0454546, 0.0454546, 0.0454546, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oyyta"]
+gradient = SubResource("Gradient_q1qvg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_56vci")
@@ -50,17 +59,21 @@ position = Vector2(1177, 334)
 scale = Vector2(0.02, 34)
 
 [node name="dangerZone" parent="Walls" instance=ExtResource("4_vyy1c")]
+z_index = 2
 
 [node name="dangerZone2" parent="Walls" instance=ExtResource("4_vyy1c")]
+z_index = 2
 position = Vector2(1152, 648)
 rotation = -3.14159
 
 [node name="dangerZoneWall" parent="Walls" instance=ExtResource("4_vyy1c")]
+z_index = 2
 position = Vector2(-1.81899e-12, 647)
 rotation = -1.5708
 scale = Vector2(0.561, 1)
 
 [node name="dangerZoneWall2" parent="Walls" instance=ExtResource("4_vyy1c")]
+z_index = 2
 position = Vector2(1152, 0)
 rotation = 1.5708
 scale = Vector2(0.561, 1)
@@ -72,8 +85,25 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="gameOverTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.1
 one_shot = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+z_index = 1
+color = Color(0.505882, 0.505882, 0.505882, 1)
+
+[node name="Sun" type="PointLight2D" parent="."]
+position = Vector2(-365, 380)
+color = Color(1, 0.890196, 0.741176, 1)
+energy = 3.0
+blend_mode = 2
+range_z_max = 1
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.235294)
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_oyyta")
+texture_scale = 50.0
+height = 50.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="gameOverTimer" to="." method="_on_game_over_timer_timeout"]

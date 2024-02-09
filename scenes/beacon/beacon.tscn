@@ -1,9 +1,32 @@
-[gd_scene load_steps=37 format=3 uid="uid://c6xps1q4ha4lu"]
+[gd_scene load_steps=42 format=3 uid="uid://c6xps1q4ha4lu"]
 
 [ext_resource type="Script" path="res://scenes/beacon/beacon.gd" id="1_u1dab"]
 [ext_resource type="Texture2D" uid="uid://bj372vctmyivv" path="res://assets/beacon/spaceStation_019.png" id="1_u1iu8"]
 [ext_resource type="Texture2D" uid="uid://c6cq4ckdx1fs2" path="res://assets/beacon/Firework.png" id="3_orb1y"]
 [ext_resource type="AudioStream" uid="uid://c3f4lhghoviiw" path="res://assets/sounds/sfx_zap.ogg" id="4_l37cb"]
+[ext_resource type="Texture2D" uid="uid://cbjxi7hfdfvn" path="res://assets/beacon/light.png" id="5_alnbx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rj0s"]
+atlas = ExtResource("1_u1iu8")
+region = Rect2(0, 0, 114, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0nwq"]
+atlas = ExtResource("1_u1iu8")
+region = Rect2(114, 0, 114, 114)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjgaq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rj0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0nwq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rswel"]
 radius = 16.0
@@ -226,12 +249,17 @@ animations = [{
 "speed": 40.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qmthm"]
+polygon = PackedVector2Array(-26, -20, -11, -5, -11, 4, -11, 6, -26, 20, -20, 26, -4, 9, 6, 9, 7, 12, 20, 26, 26, 20, 11, 6, 11, -7, 13, -7, 26, -20, 20, -26, 4, -9, -5, -9, -8, -13, -20, -25, -27, -20)
+
 [node name="Beacon" type="Area2D"]
 script = ExtResource("1_u1dab")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_u1iu8")
+sprite_frames = SubResource("SpriteFrames_yjgaq")
+autoplay = "default"
+frame_progress = 0.0604762
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rswel")
@@ -245,6 +273,14 @@ frame_progress = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_l37cb")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_qmthm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("5_alnbx")
+offset = Vector2(-2.5, -2.5)
+texture_scale = 0.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

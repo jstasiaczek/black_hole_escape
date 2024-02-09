@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var destroy = $destroy
 @onready var thruster_audio = $ThrusterAudio
 @onready var boom_player = $BoomPlayer
+@onready var engine_1 = $engine1
+@onready var engine_2 = $engine2
 
 var died: bool = false
 var button_pressed_count: int = 0
@@ -67,5 +69,7 @@ func die():
 	died = true
 	set_physics_process(false)
 	reset_thrusters()
+	engine_1.hide()
+	engine_2.hide()
 	thruster_audio.stop()
 	destroy.play("default")

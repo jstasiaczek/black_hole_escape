@@ -97,7 +97,7 @@ text = "
 
 [img]res://assets/meteors/asteroid_1.png[/img] [font_size=24]Asteroid - avoid at any cost[/font_size]
 
-[img]res://assets/beacon/spaceStation_019.png[/img] [font_size=24]Beacon - fly through it to score a point[/font_size] 
+[img]res://assets/beacon/spaceStation_019_main.png[/img] [font_size=24]Beacon - fly through it to score a point[/font_size] 
 
 [img height=80]res://assets/danger/danger_zone.png[/img] [font_size=24] Keep you ship away from edges[/font_size] 
 [/font]"

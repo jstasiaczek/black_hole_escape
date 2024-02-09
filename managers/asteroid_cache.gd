@@ -13,9 +13,7 @@ var _asteroids: Array[AsteroidInfo] = []
 
 func _init():
 	var asteroid_files: Array[String] = _get_list()
-	print(asteroid_files)
 	_preload_asteroids(asteroid_files)
-	
 	
 func get_random_asteroid() -> AsteroidInfo:
 	var index: int = randi_range(0, _asteroids.size()-1)
@@ -23,7 +21,6 @@ func get_random_asteroid() -> AsteroidInfo:
 	
 func _preload_asteroids(asteroid_files: Array[String]):
 	for asteroid_file_name in asteroid_files:
-		print(ASTEROID_PATH + asteroid_file_name)
 		var image = load(ASTEROID_PATH + asteroid_file_name)
 		var width = image.get_width()
 		var height = image.get_height()
@@ -43,22 +40,9 @@ func _create_info(path: String, width: int, height: int, image: Texture2D, polyg
 func _get_list() -> Array[String]:
 	var list: Array[String] = []
 	
-	for i in range(1, 9):
+	for i in range(1, GameManager.ASTEROID_TYPE_COUNT+1):
 		list.append("asteroid_" + str(i) + ".png")
 	return list
-
-func _get_asteroid_list() -> Array[String]:
-	var asteroids: Array[String] = []
-	var dir := DirAccess.open(ASTEROID_PATH)
-	if dir == null:
-		return asteroids
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if not dir.current_is_dir() and file_name.find('.import') == -1:
-			asteroids.append(file_name)
-		file_name = dir.get_next()
-	return asteroids
 
 func _create_collision_shape(image: Texture) -> Array[PackedVector2Array]:
 	var map = BitMap.new()

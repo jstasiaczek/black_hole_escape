@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var sprite_2d = $Sprite2D
+@onready var shadow_container = $shadowContainer
 
 @export var height = 0
 @export var width = 0
@@ -20,6 +21,7 @@ func _ready():
 	sprite_2d.texture = image
 	init_rotation()
 	create_collision_shape()
+	create_light_shape()
 
 	SignalManager.on_ship_destroyed.connect(on_ship_destroyed)
 	
@@ -31,6 +33,17 @@ func init_rotation():
 
 func on_ship_destroyed():
 	set_process(false)
+
+func create_light_shape():
+	for poly in asteroid_info.polygons:
+		var shadow = LightOccluder2D.new()
+		var shadow_polygon = OccluderPolygon2D.new()
+		shadow_polygon.polygon = poly
+		shadow.occluder = shadow_polygon
+		shadow.position -= Vector2(width / 2.0, height/ 2.0)
+		shadow_container.add_child(shadow)
+	
+
 
 func create_collision_shape():
 	for poly in asteroid_info.polygons:

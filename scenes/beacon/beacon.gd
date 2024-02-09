@@ -31,7 +31,7 @@ func _on_body_entered(body):
 		already_scored = true
 		on_body_entered_ship(body)
 
-func on_body_entered_ship(body):
+func on_body_entered_ship(_body):
 	ScoreManager.increas_score(GameManager.BEACON_SCORE_VALUE)
 	audio_stream_player.play()
 	sprite_2d.visible = false

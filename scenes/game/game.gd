@@ -18,8 +18,8 @@ func _ready():
 	var x_max = spawn_max.position.x
 	width = x_max - x_min
 	
-	spawn_asteroids()
-	spawn_asteroids(300)
+	spawn_asteroid_selector()
+	spawn_asteroid_selector(250)
 	
 	SignalManager.on_ship_destroyed.connect(on_ship_destroyed)
 	
@@ -37,15 +37,48 @@ func getAsteroidRadius(asteroid: Node2D) -> float:
 func getAsteroidOrBeacon():
 	var asteroid: Node2D
 	var radius: float
-	if randi_range(0, 100) > 80 and beacon_spawned == false:
+	if randi_range(0, 100) > 90 and beacon_spawned == false:
 		beacon_spawned = true
 		asteroid = beaconScene.instantiate()
-		radius = 114
+		radius = GameManager.BEACON_WIDTH / 2.0
 	else:
 		asteroid =asteroidScene.instantiate()
 		radius = getAsteroidRadius(asteroid)
 	
 	return [asteroid, radius]
+
+func spawn_friend_asteroid(radius: float, asteroid: Node2D):
+	if radius < 30 and randi_range(0, 100) > 80:
+		return
+	var clone = asteroid.duplicate()
+	clone.position.y -= 50
+	asteroid_container.add_child(clone)
+
+func spawn_asteroid_selector(offset: int = 0):
+	if GameManager.SPAWNER_TYPE == 1:
+		spawn_asteroids(offset)
+	elif GameManager.SPAWNER_TYPE == 2:
+		spawn_asteroids2(offset)
+	
+
+func spawn_asteroids2(offset: int = 0):
+	var last_free: float = -100
+	beacon_spawned = false
+	var is_space_left: bool = true
+	var i: int = 0
+	while is_space_left:
+		var result = getAsteroidOrBeacon()
+		var asteroid: Node2D = result[0]
+		var radius: float = result[1]
+		asteroid.position = Vector2(
+			last_free + radius + randf_range(50, 80.0),
+			-150+ offset + randf_range(-50.0, 50.0)
+			)
+		last_free = asteroid.position.x + radius
+		asteroid_container.add_child(asteroid)
+		if (asteroid.position.x + radius) >= width:
+			is_space_left = false
+		i += 1
 
 func spawn_asteroids(offset: int = 0):
 	var count: int = randi_range(GameManager.ASTEROID_COUNT_MIN, GameManager.ASTEROID_COUNT_MAX+1)
@@ -66,7 +99,8 @@ func spawn_asteroids(offset: int = 0):
 			prev_radius = radius
 
 func _on_timer_timeout():
-	spawn_asteroids()
+	spawn_asteroid_selector()
 
 func _on_game_over_timer_timeout():
 	GameManager.load_game_over_scene()
+
