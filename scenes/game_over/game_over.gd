@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	points.text = str(ScoreManager.get_score())+" points"
-	high_points.text = "High Score\n"+str(ScoreManager.get_score())+" points"
+	high_points.text = "High Score\n"+str(ScoreManager.get_high_score())+" points"
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action"):

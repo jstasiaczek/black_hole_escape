@@ -3,6 +3,7 @@ extends Area2D
 @onready var sprite_2d = $Sprite2D
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var point_light_2d = $PointLight2D
 
 var already_scored: bool = false
 
@@ -35,6 +36,7 @@ func on_body_entered_ship(_body):
 	ScoreManager.increas_score(GameManager.BEACON_SCORE_VALUE)
 	audio_stream_player.play()
 	sprite_2d.visible = false
+	point_light_2d.visible = false
 	animated_sprite_2d.visible = true
 	animated_sprite_2d.play()
 

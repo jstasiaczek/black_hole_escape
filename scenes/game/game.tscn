@@ -58,31 +58,31 @@ scale = Vector2(0.02, 34)
 position = Vector2(1177, 334)
 scale = Vector2(0.02, 34)
 
-[node name="dangerZone" parent="Walls" instance=ExtResource("4_vyy1c")]
-z_index = 2
-
-[node name="dangerZone2" parent="Walls" instance=ExtResource("4_vyy1c")]
-z_index = 2
-position = Vector2(1152, 648)
-rotation = -3.14159
-
-[node name="dangerZoneWall" parent="Walls" instance=ExtResource("4_vyy1c")]
-z_index = 2
-position = Vector2(-1.81899e-12, 647)
-rotation = -1.5708
-scale = Vector2(0.561, 1)
-
-[node name="dangerZoneWall2" parent="Walls" instance=ExtResource("4_vyy1c")]
-z_index = 2
-position = Vector2(1152, 0)
-rotation = 1.5708
-scale = Vector2(0.561, 1)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("6_vypjj")]
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="dangerZone" parent="CanvasLayer" instance=ExtResource("4_vyy1c")]
+z_index = 2
+
+[node name="dangerZone2" parent="CanvasLayer" instance=ExtResource("4_vyy1c")]
+z_index = 2
+position = Vector2(1152, 648)
+rotation = -3.14159
+
+[node name="dangerZoneWall" parent="CanvasLayer" instance=ExtResource("4_vyy1c")]
+z_index = 2
+position = Vector2(-1.81899e-12, 647)
+rotation = -1.5708
+scale = Vector2(0.561, 1)
+
+[node name="dangerZoneWall2" parent="CanvasLayer" instance=ExtResource("4_vyy1c")]
+z_index = 2
+position = Vector2(1152, 0)
+rotation = 1.5708
+scale = Vector2(0.561, 1)
 
 [node name="gameOverTimer" type="Timer" parent="."]
 wait_time = 2.1
@@ -90,12 +90,12 @@ one_shot = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 z_index = 1
-color = Color(0.505882, 0.505882, 0.505882, 1)
+color = Color(0.360784, 0.360784, 0.360784, 1)
 
 [node name="Sun" type="PointLight2D" parent="."]
-position = Vector2(-365, 380)
+position = Vector2(-83, 144)
 color = Color(1, 0.890196, 0.741176, 1)
-energy = 3.0
+energy = 1.1
 blend_mode = 2
 range_z_max = 1
 shadow_enabled = true
@@ -103,7 +103,6 @@ shadow_color = Color(0, 0, 0, 0.235294)
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_oyyta")
 texture_scale = 50.0
-height = 50.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="gameOverTimer" to="." method="_on_game_over_timer_timeout"]

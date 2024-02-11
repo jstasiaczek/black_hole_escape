@@ -130,9 +130,6 @@ fill_from = Vector2(0.5, 0.486239)
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_u2t6m")
 
-[node name="Image" type="Sprite2D" parent="."]
-texture = ExtResource("2_38lnr")
-
 [node name="thrusterForward" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 48.3333)
 scale = Vector2(0.8, 0.8)
@@ -197,6 +194,39 @@ autoplay = true
 stream = ExtResource("7_gfd7o")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-energy = 0.5
+scale = Vector2(1.66667, 1.2)
+energy = 0.8
 texture = SubResource("GradientTexture2D_drav0")
+
+[node name="engineLight" type="PointLight2D" parent="."]
+position = Vector2(-25, 40)
+texture = ExtResource("4_3o72o")
+
+[node name="engineLight2" type="PointLight2D" parent="."]
+position = Vector2(25, 40)
+texture = ExtResource("4_3o72o")
+
+[node name="thrusterLight" type="PointLight2D" parent="."]
+position = Vector2(0, 51.6667)
+texture = ExtResource("4_3o72o")
+
+[node name="thrusterLightBack" type="PointLight2D" parent="."]
+position = Vector2(3.48166e-13, -46.6667)
+rotation = -3.14159
+scale = Vector2(0.833, 0.6)
+texture = ExtResource("4_3o72o")
+
+[node name="thrusterLightLeft" type="PointLight2D" parent="."]
+position = Vector2(-56.6667, 8.33333)
+rotation = 1.5708
+scale = Vector2(0.833, 0.6)
+texture = ExtResource("4_3o72o")
+
+[node name="thrusterLightRight" type="PointLight2D" parent="."]
+position = Vector2(56.6667, 8.33333)
+rotation = -1.5708
+scale = Vector2(0.833, 0.6)
+texture = ExtResource("4_3o72o")
+
+[node name="Image" type="Sprite2D" parent="."]
+texture = ExtResource("2_38lnr")

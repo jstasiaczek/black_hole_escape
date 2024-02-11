@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv76iv8x48mqr"]
+[gd_scene load_steps=10 format=3 uid="uid://bv76iv8x48mqr"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_28u1f"]
 [ext_resource type="Texture2D" uid="uid://dmhrquo5kcdkv" path="res://assets/bg/bg_02_h.png" id="1_acotj"]
@@ -11,6 +11,10 @@ font_size = 72
 [sub_resource type="LabelSettings" id="LabelSettings_s872c"]
 font = ExtResource("2_k8m50")
 font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppvtd"]
+font = ExtResource("2_k8m50")
+font_size = 32
 
 [sub_resource type="Animation" id="Animation_735rr"]
 length = 0.001
@@ -111,6 +115,13 @@ start game"
 label_settings = SubResource("LabelSettings_s872c")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="high_socre" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_ppvtd")
+horizontal_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
