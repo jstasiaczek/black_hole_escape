@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk0xnahrcm0ca"]
+[gd_scene load_steps=13 format=3 uid="uid://dk0xnahrcm0ca"]
 
 [ext_resource type="Script" path="res://scenes/laser/laser.gd" id="1_euay5"]
 [ext_resource type="Texture2D" uid="uid://yghe30ruji4t" path="res://assets/enemy/laserRed01.png" id="1_rwovp"]
 [ext_resource type="Texture2D" uid="uid://b6hid8ygbg7m4" path="res://assets/enemy/bird_deadz-Sheet.png" id="3_m31ns"]
+[ext_resource type="AudioStream" uid="uid://cnj8d28kgstnx" path="res://assets/sounds/laserfire01.ogg" id="4_ke2cx"]
+[ext_resource type="AudioStream" uid="uid://x48g0an2iguh" path="res://assets/sounds/NenadSimic - Muffled Distant Explosion.wav" id="5_de6dt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yyql6"]
 radius = 3.0
@@ -73,6 +75,13 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_7ir4v")
 frame = 4
 frame_progress = 1.0
+
+[node name="shotSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ke2cx")
+
+[node name="boomSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_de6dt")
+volume_db = 5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

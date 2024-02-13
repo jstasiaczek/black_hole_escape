@@ -2,6 +2,8 @@ extends Area2D
 
 @onready var sprite_2d = $Sprite2D
 @onready var explosion_animation = $ExplosionAnimation
+@onready var shot_sound = $shotSound
+@onready var boom_sound = $boomSound
 
 var player_point: Vector2
 var direction
@@ -11,6 +13,7 @@ func _ready():
 	rotation = position.direction_to(player_point).angle() + PI / 2
 	SignalManager.on_ship_destroyed.connect(on_ship_destroyed)
 	move_laser(0.15)
+	shot_sound.play()
 
 func move_laser(delta):
 	position = position + (GameManager.LASER_SPEED * delta) * direction
@@ -33,6 +36,7 @@ func _on_screen_exited():
 	queue_free()
 
 func die():
+	boom_sound.play()
 	sprite_2d.visible = false
 	explosion_animation.visible = true
 	explosion_animation.play("default")
