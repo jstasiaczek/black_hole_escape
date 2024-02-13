@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dabt05yr6s4gr"]
+
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_3r3vg"]
+[ext_resource type="Texture2D" uid="uid://r0ejo35kupkl" path="res://assets/enemy/body.png" id="1_icj76"]
+[ext_resource type="Texture2D" uid="uid://cwxjw5mlqrdxw" path="res://assets/enemy/turret.png" id="2_env1f"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cdo3i"]
+polygon = PackedVector2Array(-34, -36, -34, 34, 34, 34, 34, -36)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x6x0m"]
+polygon = PackedVector2Array(-40, 8, -36, 4, -28, 8, -12, 8, -8, 4, 14, 4, 20, 12, 20, 24, 14, 30, 14, 30, -8, 32, -14, 26, -26, 26, -30, 32, -36, 32, -40, 28)
+
+[sub_resource type="Gradient" id="Gradient_4g3ka"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qujg7"]
+gradient = SubResource("Gradient_4g3ka")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Enemy" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_3r3vg")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_icj76")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body"]
+occluder = SubResource("OccluderPolygon2D_cdo3i")
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(-10, 18)
+rotation = 1.5708
+texture = ExtResource("2_env1f")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Turret"]
+position = Vector2(-18, -10)
+rotation = -1.5708
+occluder = SubResource("OccluderPolygon2D_x6x0m")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(27, -46, 40, -46, 40, -43.9, 46, -38.9, 46, -36, 105, -37, 105, 37, 46, 37, 39, 46, 25.3, 46, 27.1, 54, 5.5, 54, 4, 52, -8.2, 52, -10.2, 54, -32, 54, -32, 46, -40, 46, -40, 43.9, -46, 38.9, -46, 36, -105, 37, -105, -37, -46, -36, -46, -38.8, -38.8, -46, -32, -46, -32, -54, -12.5, -54, 3.4, -52.2, 5.2, -54, 27, -54)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(19, -19)
+scale = Vector2(0.429687, 0.429688)
+texture = SubResource("GradientTexture2D_qujg7")
+texture_scale = 0.8
+
+[node name="Timer" type="Timer" parent="." groups=["enemy"]]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

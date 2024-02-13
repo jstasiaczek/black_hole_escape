@@ -1,21 +1,20 @@
 extends CharacterBody2D
-
 @onready var image = $Image
-@onready var thruster_forward = $thrusterForward
-@onready var thruster_backward = $thrusterBackward
-@onready var thruster_right = $thrusterRight
-@onready var thruster_left = $thrusterLeft
+@onready var thruster_forward = $thrusters/thrusterForward
+@onready var thruster_backward = $thrusters/thrusterBackward
+@onready var thruster_right = $thrusters/thrusterRight
+@onready var thruster_left = $thrusters/thrusterLeft
+@onready var engine_1 = $thrusters/engine1
+@onready var engine_2 = $thrusters/engine2
 @onready var destroy = $destroy
 @onready var thruster_audio = $ThrusterAudio
 @onready var boom_player = $BoomPlayer
-@onready var engine_1 = $engine1
-@onready var engine_2 = $engine2
-@onready var thruster_light = $thrusterLight
-@onready var thruster_light_back = $thrusterLightBack
-@onready var thruster_light_left = $thrusterLightLeft
-@onready var thruster_light_right = $thrusterLightRight
-@onready var engine_light_2 = $engineLight2
-@onready var engine_light = $engineLight
+@onready var thruster_light = $lights/thrusterLight
+@onready var thruster_light_back = $lights/thrusterLightBack
+@onready var thruster_light_left = $lights/thrusterLightLeft
+@onready var thruster_light_right = $lights/thrusterLightRight
+@onready var engine_light_2 = $lights/engineLight2
+@onready var engine_light = $lights/engineLight
 
 var died: bool = false
 var button_pressed_count: int = 0
@@ -29,19 +28,6 @@ func _ready():
 	thruster_audio.play()
 	
 	SignalManager.on_ship_destroyed.connect(die)
-
-func reset_thrusters():
-	thruster_forward.visible = false
-	thruster_light.visible = false
-	thruster_backward.visible = false
-	thruster_left.visible = false
-	thruster_right.visible = false
-	thruster_light_back.visible = false
-	thruster_light_left.visible = false
-	thruster_light_right.visible = false
-	engine_light.visible = false
-	engine_light_2.visible = false
-	thruster_audio.stop()
 
 func _physics_process(delta):
 	if died:
@@ -89,3 +75,16 @@ func die():
 	engine_2.hide()
 	thruster_audio.stop()
 	destroy.play("default")
+
+func reset_thrusters():
+	thruster_forward.visible = false
+	thruster_light.visible = false
+	thruster_backward.visible = false
+	thruster_left.visible = false
+	thruster_right.visible = false
+	thruster_light_back.visible = false
+	thruster_light_left.visible = false
+	thruster_light_right.visible = false
+	engine_light.visible = false
+	engine_light_2.visible = false
+	thruster_audio.stop()

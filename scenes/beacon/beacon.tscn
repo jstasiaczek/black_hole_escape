@@ -252,7 +252,7 @@ animations = [{
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qmthm"]
 polygon = PackedVector2Array(-26, -20, -11, -5, -11, 4, -11, 6, -26, 20, -20, 26, -4, 9, 6, 9, 7, 12, 20, 26, 26, 20, 11, 6, 11, -7, 13, -7, 26, -20, 20, -26, 4, -9, -5, -9, -8, -13, -20, -25, -27, -20)
 
-[node name="Beacon" type="Area2D"]
+[node name="Beacon" type="Area2D" groups=["beacon"]]
 script = ExtResource("1_u1dab")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

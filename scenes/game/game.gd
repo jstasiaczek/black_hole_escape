@@ -2,7 +2,10 @@ extends Node2D
 
 var asteroidScene: PackedScene = preload("res://scenes/asteroids/asteroid.tscn")
 var beaconScene: PackedScene = preload("res://scenes/beacon/beacon.tscn")
+var enemyScene: PackedScene = preload("res://scenes/enemy/enemy.tscn")
+const laser: PackedScene = preload("res://scenes/laser/laser.tscn")
 
+@onready var laster_container = $laster_container
 @onready var asteroid_container = $asteroid_container
 @onready var spawn_min = $spawnMin
 @onready var spawn_max = $spawnMax
@@ -11,6 +14,7 @@ var beaconScene: PackedScene = preload("res://scenes/beacon/beacon.tscn")
 
 var width: int 
 var beacon_spawned: bool = false
+var enemy_spawn_countdown: int = 0
 
 func _ready():
 	ScoreManager.reset_score()
@@ -22,6 +26,7 @@ func _ready():
 	spawn_asteroid_selector(250)
 	
 	SignalManager.on_ship_destroyed.connect(on_ship_destroyed)
+	SignalManager.on_enemy_fire.connect(on_enemy_fire)
 	
 func on_ship_destroyed():
 	set_physics_process(false)
@@ -40,6 +45,10 @@ func getAsteroidOrBeacon():
 	if randi_range(0, 100) > 90 and beacon_spawned == false:
 		beacon_spawned = true
 		asteroid = beaconScene.instantiate()
+		radius = GameManager.BEACON_WIDTH / 2.0
+	elif randi_range(0, 100) > 90 and enemy_spawn_countdown == 0:
+		enemy_spawn_countdown = 5
+		asteroid = enemyScene.instantiate()
 		radius = GameManager.BEACON_WIDTH / 2.0
 	else:
 		asteroid =asteroidScene.instantiate()
@@ -85,6 +94,8 @@ func spawn_asteroids(offset: int = 0):
 	var prev_pos: float = 0
 	var prev_radius: float = 0
 	beacon_spawned = false
+	if enemy_spawn_countdown > 0:
+		enemy_spawn_countdown -= 1
 	for i in range(count):
 		var result = getAsteroidOrBeacon()
 		var asteroid: Node2D = result[0]
@@ -97,6 +108,12 @@ func spawn_asteroids(offset: int = 0):
 			asteroid_container.add_child(asteroid)
 			prev_pos = asteroid.position.x 
 			prev_radius = radius
+
+func on_enemy_fire(start_position: Vector2, end_position: Vector2):
+	var laserIns = laser.instantiate()
+	laserIns.player_point = end_position
+	laserIns.position = start_position
+	laster_container.add_child(laserIns)
 
 func _on_timer_timeout():
 	spawn_asteroid_selector()

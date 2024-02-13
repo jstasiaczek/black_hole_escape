@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_u7s58"]
 
-[node name="Asteroid" type="Area2D"]
+[node name="Asteroid" type="Area2D" groups=["asteroid"]]
 script = ExtResource("1_u7s58")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -18,7 +18,6 @@ func read():
 		write()
 	else:
 		_high_score = int(file.get_as_text())
-		print(_high_score)
 
 func increas_score(value = 0):
 	_score += value
