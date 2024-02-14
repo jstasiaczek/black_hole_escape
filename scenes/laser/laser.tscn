@@ -76,12 +76,12 @@ sprite_frames = SubResource("SpriteFrames_7ir4v")
 frame = 4
 frame_progress = 1.0
 
-[node name="shotSound" type="AudioStreamPlayer2D" parent="."]
+[node name="shotSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ke2cx")
+volume_db = -5.0
 
-[node name="boomSound" type="AudioStreamPlayer2D" parent="."]
+[node name="boomSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_de6dt")
-volume_db = 5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -93,17 +93,19 @@ text = "
 
 
 
-
 [font=res://assets/fonts/kenvector_future_thin.ttf][font_size=36]Controls:[/font_size]
 [font_size=24]W,A,S,D - ship controls[/font_size]
 
 [font_size=36]Objects:[/font_size]
 
-[img]res://assets/meteors/asteroid_1.png[/img] [font_size=24]Asteroid - avoid at any cost[/font_size]
+[img height=60]res://assets/meteors/asteroid_1.png[/img] [font_size=24]Asteroid - avoid at any cost[/font_size]
 
-[img]res://assets/beacon/spaceStation_019_main.png[/img] [font_size=24]Beacon - fly through it to score a point[/font_size] 
+[img  height=60]res://assets/beacon/spaceStation_019_main.png[/img] [font_size=24]Beacon - fly through it to score a point[/font_size] 
 
-[img height=80]res://assets/danger/danger_zone.png[/img] [font_size=24] Keep you ship away from edges[/font_size] 
+[img height=60]res://assets/danger/danger_zone.png[/img] [font_size=24] Keep you ship away from edges[/font_size] 
+
+[img height=60]res://assets/enemy/preview.png[/img] [font_size=24] Avoid enemy probes and their lasers beams[/font_size] 
+
 [/font]"
 
 [node name="Label2" type="Label" parent="MarginContainer"]
