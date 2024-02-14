@@ -86,17 +86,35 @@ size_flags_vertical = 0
 text = "Black Hole Escape"
 label_settings = SubResource("LabelSettings_mqrn5")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+[node name="Label2" type="Label" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Press SPACE to start game"
+label_settings = SubResource("LabelSettings_s872c")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="high_socre" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+label_settings = SubResource("LabelSettings_ppvtd")
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 bbcode_enabled = true
 text = "
 
 
 
-[font=res://assets/fonts/kenvector_future_thin.ttf][font_size=36]Controls:[/font_size]
-[font_size=24]W,A,S,D - ship controls[/font_size]
-
-[font_size=36]Objects:[/font_size]
+[font=res://assets/fonts/kenvector_future_thin.ttf][font_size=36]Objects:[/font_size]
 
 [img height=60]res://assets/meteors/asteroid_1.png[/img] [font_size=24]Asteroid - avoid at any cost[/font_size]
 
@@ -108,22 +126,24 @@ text = "
 
 [/font]"
 
-[node name="Label2" type="Label" parent="MarginContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-text = "Press SPACE
-to 
-start game"
-label_settings = SubResource("LabelSettings_s872c")
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "
 
-[node name="high_socre" type="Label" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-label_settings = SubResource("LabelSettings_ppvtd")
-horizontal_alignment = 2
+
+
+[font=res://assets/fonts/kenvector_future_thin.ttf][font_size=36]Controls:[/font_size]
+
+[font_size=24]W,A,S,D - ship controls[/font_size]
+[font_size=24]E- activate shield[/font_size]
+
+
+[font_size=36]Power ups:[/font_size]
+
+[img height=60]res://assets/ships/shield.png[/img] [font_size=24]Shield - protect against energy weapons, cost 3 point[/font_size]
+[/font]"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

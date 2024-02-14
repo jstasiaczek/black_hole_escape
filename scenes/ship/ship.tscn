@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ee2pm4fw2xjc"]
+[gd_scene load_steps=25 format=3 uid="uid://ee2pm4fw2xjc"]
 
 [ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_u2t6m"]
 [ext_resource type="Texture2D" uid="uid://dycf6wwpjd5kx" path="res://assets/ships/playerShip1_orange.png" id="2_38lnr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bu4fvogdss8tw" path="res://assets/ships/Explosion.png" id="5_vfavq"]
 [ext_resource type="AudioStream" uid="uid://dvbxlvtdqltwl" path="res://assets/sounds/159012__primeval_polypod__distant-rumble.wav" id="6_k445o"]
 [ext_resource type="AudioStream" uid="uid://vb4xpnpnsg8m" path="res://assets/sounds/explosion.ogg" id="7_gfd7o"]
+[ext_resource type="PackedScene" uid="uid://b4u47jik71kkt" path="res://scenes/shield/shield.tscn" id="8_4jbjt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l4n8m"]
 animations = [{
@@ -234,3 +235,7 @@ stream = ExtResource("7_gfd7o")
 
 [node name="Image" type="Sprite2D" parent="."]
 texture = ExtResource("2_38lnr")
+
+[node name="Shield" parent="." instance=ExtResource("8_4jbjt")]
+visible = false
+position = Vector2(0, 3.33333)

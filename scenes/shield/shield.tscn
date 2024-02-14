@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4u47jik71kkt"]
+
+[ext_resource type="Texture2D" uid="uid://bjoff8ywyk3cx" path="res://assets/ships/shield.png" id="1_x4d66"]
+[ext_resource type="Script" path="res://scenes/shield/shield.gd" id="1_yml7u"]
+[ext_resource type="AudioStream" uid="uid://bk5cv7bnnx6kn" path="res://assets/sounds/sfx_shieldUp.ogg" id="3_ybakv"]
+[ext_resource type="AudioStream" uid="uid://bmu0b3bvqy6d2" path="res://assets/sounds/sfx_lose.ogg" id="4_dgb0o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uuhtl"]
+radius = 66.0
+height = 132.0
+
+[node name="Shield" type="Area2D" groups=["shield"]]
+script = ExtResource("1_yml7u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x4d66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1, 1.04)
+shape = SubResource("CapsuleShape2D_uuhtl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("1_x4d66")
+
+[node name="ShieldUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ybakv")
+
+[node name="NoPoints" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dgb0o")
+volume_db = -5.0

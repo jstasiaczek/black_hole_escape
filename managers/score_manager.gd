@@ -19,6 +19,10 @@ func read():
 	else:
 		_high_score = int(file.get_as_text())
 
+func decrease_score(value = 0):
+	_score -= value
+	SignalManager.on_player_score.emit()
+
 func increas_score(value = 0):
 	_score += value
 	if _score > _high_score:

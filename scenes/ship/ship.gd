@@ -15,9 +15,11 @@ extends CharacterBody2D
 @onready var thruster_light_right = $lights/thrusterLightRight
 @onready var engine_light_2 = $lights/engineLight2
 @onready var engine_light = $lights/engineLight
+@onready var shield = $Shield
 
 var died: bool = false
 var button_pressed_count: int = 0
+var is_shield: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +30,14 @@ func _ready():
 	thruster_audio.play()
 	
 	SignalManager.on_ship_destroyed.connect(die)
+	SignalManager.on_shield_activated.connect(on_shield_activated)
+	SignalManager.on_shield_hit.connect(on_shield_hit)
+	
+func on_shield_activated():
+	is_shield = true
+
+func on_shield_hit():
+	is_shield = false
 
 func _physics_process(delta):
 	if died:
@@ -74,6 +84,7 @@ func die():
 	engine_1.hide()
 	engine_2.hide()
 	thruster_audio.stop()
+	SignalManager.on_shield_hit.emit()
 	destroy.play("default")
 
 func reset_thrusters():

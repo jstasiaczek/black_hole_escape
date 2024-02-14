@@ -5,6 +5,8 @@ extends Area2D
 @onready var shot_sound = $shotSound
 @onready var boom_sound = $boomSound
 
+var is_destroyed: bool = false
+
 var player_point: Vector2
 var direction
 # Called when the node enters the scene tree for the first time.
@@ -36,6 +38,7 @@ func _on_screen_exited():
 	queue_free()
 
 func die():
+	is_destroyed = true
 	boom_sound.play()
 	sprite_2d.visible = false
 	explosion_animation.visible = true
@@ -44,10 +47,13 @@ func die():
 func _on_area_entered(area):
 	if area.is_in_group(GameManager.ASTEROID_GROUP):
 		die()
+	if area.is_in_group(GameManager.SHIELD_GROUP) and area.visible:
+		SignalManager.on_shield_hit.emit()
+		die()
 
 
 func _on_body_entered(body):
-	if body.is_in_group(GameManager.SHIP_GROUP):
+	if body.is_in_group(GameManager.SHIP_GROUP) and body.is_shield == false and is_destroyed == false:
 		SignalManager.on_ship_destroyed.emit()
 		die()
 
