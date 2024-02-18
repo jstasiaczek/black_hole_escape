@@ -5,7 +5,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_wuhhy"]
 font = ExtResource("1_43q4d")
-font_size = 34
+font_size = 24
+font_color = Color(1, 1, 1, 0.698039)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fplwx"]
 font = ExtResource("1_43q4d")
@@ -37,6 +38,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "0 points"
+label_settings = SubResource("LabelSettings_wuhhy")
+
+[node name="distanceLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "distance 10 km"
 label_settings = SubResource("LabelSettings_wuhhy")
 
 [node name="game_over" type="Label" parent="MarginContainer"]

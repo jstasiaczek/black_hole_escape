@@ -88,7 +88,7 @@ label_settings = SubResource("LabelSettings_mqrn5")
 
 [node name="Label2" type="Label" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "Press SPACE to start game"
 label_settings = SubResource("LabelSettings_s872c")

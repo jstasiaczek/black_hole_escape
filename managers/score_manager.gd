@@ -4,6 +4,7 @@ const SCORE_PATH = "user://data.json"
 
 var _score: int = 0
 var _high_score: int = 0
+var _distance: float = 0
 
 func _ready():
 	read()
@@ -23,15 +24,25 @@ func decrease_score(value = 0):
 	_score -= value
 	SignalManager.on_player_score.emit()
 
+
 func increas_score(value = 0):
 	_score += value
-	if _score > _high_score:
-		_high_score = _score
-		write()
 	SignalManager.on_player_score.emit()
+
+func update_high_score():
+	var value = _score + int(_distance)
+	if value > _high_score:
+		_high_score = value
+		write()
 
 func get_score():
 	return _score
+
+func get_distance():
+	return _distance
+
+func update_distance(dist: float):
+	_distance = dist
 	
 func get_high_score():
 	return _high_score

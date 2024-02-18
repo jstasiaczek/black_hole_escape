@@ -4,7 +4,8 @@ extends Control
 @onready var high_points = $MarginContainer/high_points
 
 func _ready():
-	points.text = str(ScoreManager.get_score())+" points"
+	var dist = "%.1f" % ScoreManager.get_distance()
+	points.text = str(ScoreManager.get_score())+" points\n" + "Distance " + dist + "km"
 	high_points.text = "High Score\n"+str(ScoreManager.get_high_score())+" points"
 
 func _process(_delta):

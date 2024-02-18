@@ -64,6 +64,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "0 points"
 label_settings = SubResource("LabelSettings_7v372")
+horizontal_alignment = 2
 
 [node name="high_points" type="Label" parent="MarginContainer"]
 layout_mode = 2
@@ -72,4 +73,3 @@ size_flags_vertical = 8
 text = "High Score
 0 points"
 label_settings = SubResource("LabelSettings_7v372")
-horizontal_alignment = 2
