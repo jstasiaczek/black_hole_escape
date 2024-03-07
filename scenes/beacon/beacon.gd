@@ -19,7 +19,6 @@ func init_rotation():
 	animated_sprite_2d.rotate(-rotate_value)
 	
 func on_ship_destroyed():
-	set_physics_process(false)
 	set_process(false)
 
 func _process(delta):

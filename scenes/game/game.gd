@@ -29,7 +29,6 @@ func _ready():
 	SignalManager.on_enemy_fire.connect(on_enemy_fire)
 	
 func on_ship_destroyed():
-	set_physics_process(false)
 	set_process(false)
 	game_over_timer.start()
 	timer.stop()
@@ -105,7 +104,7 @@ func spawn_asteroids(offset: int = 0):
 			-150+ offset + randf_range(-50.0, 50.0)
 			)
 		if  asteroid.position.x - radius > prev_pos+prev_radius or i == 0:
-			asteroid_container.add_child(asteroid)
+			asteroid_container.call_deferred("add_child", asteroid)
 			prev_pos = asteroid.position.x 
 			prev_radius = radius
 
@@ -113,7 +112,7 @@ func on_enemy_fire(start_position: Vector2, end_position: Vector2):
 	var laserIns = laser.instantiate()
 	laserIns.player_point = end_position
 	laserIns.position = start_position
-	laster_container.add_child(laserIns)
+	laster_container.call_deferred("add_child", laserIns)
 
 func _on_timer_timeout():
 	spawn_asteroid_selector()

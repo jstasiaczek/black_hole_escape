@@ -41,7 +41,7 @@ func create_light_shape():
 		shadow_polygon.polygon = poly
 		shadow.occluder = shadow_polygon
 		shadow.position -= Vector2(width / 2.0, height/ 2.0)
-		shadow_container.add_child(shadow)
+		shadow_container.call_deferred("add_child", shadow)
 	
 
 
@@ -50,7 +50,7 @@ func create_collision_shape():
 		var collision_polygon = CollisionPolygon2D.new()
 		collision_polygon.polygon = poly
 		collision_polygon.position -= Vector2(width / 2.0, height/ 2.0)
-		add_child(collision_polygon)
+		call_deferred("add_child", collision_polygon)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -58,10 +58,9 @@ func _process(delta):
 	if rotation_speed > 0:
 		rotation += rotation_speed * delta
 
-
 func _on_body_entered(body):
 	if body.is_in_group(GameManager.ASTEROID_DESTROY_GROUP):
-		queue_free()
+		call_deferred("queue_free")
 	elif body.is_in_group(GameManager.SHIP_GROUP):
 		SignalManager.on_ship_destroyed.emit()
 

@@ -19,7 +19,7 @@ func on_shield_hit():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("shield") and ship_destroyed == false:
 		if ScoreManager.get_score() >= GameManager.SHIELD_COST and visible == false:
 			visible = true
